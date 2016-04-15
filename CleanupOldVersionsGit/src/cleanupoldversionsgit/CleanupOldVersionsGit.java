@@ -5,10 +5,17 @@
  */
 package cleanupoldversionsgit;
 
+
+import java.io.File;
+import java.util.ArrayList;
+
 /**
  *
- * @author valentin_diana
- */
+ * @author valentin
+ * Goal: delete all files generated with a version control app not being used. We assume that the newest version should not be deleted
+* Steps: 1. Collect all file names (just the distinct ones, without version number)
+*/
+
 public class CleanupOldVersionsGit {
 
     /**
@@ -16,6 +23,31 @@ public class CleanupOldVersionsGit {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+      
+        File directory = new File(".");
+    /*    if(directory.isDirectory())
+        {
+            for(int i = 0; i <  directory.list().length; i++)
+                {
+                    Utils.print(directory.list()[i]);
+                }
+        }
+    */    
+        
+        
+        ArrayList<FileVersioned> filesVersioned = new ArrayList<FileVersioned>();
+        for (String distinctName: Utils.distinctPrefixFilenames(directory))
+        {
+            filesVersioned.add(new FileVersioned(distinctName));
+        }
+        
+        
+        for(FileVersioned f: filesVersioned)
+        {
+         //To do something here, delete files 
+        }
+       Utils.print(filesVersioned.get(0).getVersions());
+       
     }
     
 }
