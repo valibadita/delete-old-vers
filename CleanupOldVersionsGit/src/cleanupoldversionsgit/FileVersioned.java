@@ -26,6 +26,11 @@ public class FileVersioned {
         
     }
     
+    public String getPrefix()
+    {
+        return prefix;
+    }
+    
     
     
     private void appendVersions(String file)
@@ -35,7 +40,7 @@ public class FileVersioned {
         {
         if(fileName.contains(prefix))
         {
-            String sufix = fileName.substring(prefix.length(),fileName.length()-4);
+            String sufix = fileName.substring(prefix.length(),fileName.length()-4).replace(".", "");
             versions.add(sufix);
             //System.out.println(sufix);
             
@@ -47,5 +52,23 @@ public class FileVersioned {
     {
         return versions;
     }
+    
+    public String getMaxVersion()
+            {
+                
+                String[] versionStrings = new String[versions.size()];
+                versionStrings = versions.toArray(versionStrings);
+                int max = 0;
+                for (int i=0; i<versionStrings.length-1; i++)
+                {
+                   
+                    if( Integer.parseInt(versionStrings[i+1]) > Integer.parseInt(versionStrings[i]) )
+                    {  
+                        max=Integer.parseInt(versionStrings[i+1]);
+                    
+                    }
+                }
+                return String.valueOf(max);
+            }
     
 }

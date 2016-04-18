@@ -45,10 +45,22 @@ public class CleanupOldVersionsGit {
         for(FileVersioned f: filesVersioned)
         {
          //To do something here, delete files 
-            
+           ArrayList<String> versionsOfFile =  f.getVersions();
+           
+                for(String version: versionsOfFile)
+                {
+                   
+                    if(Integer.parseInt(version)<Integer.parseInt(f.getMaxVersion()))
+                    {
+                        File fileToDelete = new File(f.getPrefix() + "." + version + ".jar");
+                        Utils.print(fileToDelete.getName());
+                    }
+                }
+                    
+                
             
         }
-       Utils.print(filesVersioned.get(0).getVersions());
+     //  Utils.print(filesVersioned.get(0).getVersions());
        
     }
     
