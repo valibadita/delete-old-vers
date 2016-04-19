@@ -23,17 +23,17 @@ public class CleanupOldVersionsGit {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-      
-        File directory = new File(".");
-    /*    if(directory.isDirectory())
-        {
-            for(int i = 0; i <  directory.list().length; i++)
-                {
-                    Utils.print(directory.list()[i]);
-                }
+      try
+      {
+        File directory;
+        if(args.length!=0)
+        { 
+        directory = new File(args[0]);
         }
-    */    
-        
+        else
+        {
+        directory = new File(".");
+        }
         
         ArrayList<FileVersioned> filesVersioned = new ArrayList<FileVersioned>();
         for (String distinctName: Utils.distinctPrefixFilenames(directory))
@@ -52,19 +52,25 @@ public class CleanupOldVersionsGit {
                 
                 {
                  String  clearVersionName = version.replaceAll("\\D+", "");
-                    //Utils.print(clearVersionName);
-                    //Utils.print(f.getMaxVersion());
+                   
                     if(Integer.parseInt(clearVersionName)<f.getMaxVersion()||version.matches(".*\\D+"))
                     {
                         File fileToDelete = new File(f.getPrefix() + "." + version + ".jar");
-                      Utils.print(fileToDelete);
+                      //  Utils.print(fileToDelete);
+                        fileToDelete.delete();
                     }
                 }
                     
                 
             
         }
-     //  Utils.print(filesVersioned.get(0).getVersions());
+    
+      }
+      catch (Exception e)
+      {
+          Utils.print("Error. Please try again");
+          e.printStackTrace();
+      }
        
     }
     
