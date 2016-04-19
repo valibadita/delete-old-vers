@@ -57,7 +57,10 @@ public class CleanupOldVersionsGit {
                     {
                         File fileToDelete = new File(f.getPrefix() + "." + version + ".jar");
                       //  Utils.print(fileToDelete);
-                        fileToDelete.delete();
+                        if(fileToDelete.exists())
+                        {
+                            fileToDelete.delete();
+                        }
                     }
                 }
                     
