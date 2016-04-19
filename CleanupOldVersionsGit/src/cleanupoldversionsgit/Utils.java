@@ -45,7 +45,6 @@ public class Utils {
                 Matcher matcher = pattern.matcher(fileName);
                     if(matcher.find())
                         {
-                          //  Utils.print(matcher.group(2));
                            set.add(matcher.group(1));
                         }
                    

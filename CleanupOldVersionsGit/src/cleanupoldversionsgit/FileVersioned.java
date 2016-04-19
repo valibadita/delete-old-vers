@@ -53,7 +53,7 @@ public class FileVersioned {
         return versions;
     }
     
-    public String getMaxVersion()
+    public int getMaxVersion()
             {
                 
                 String[] versionStrings = new String[versions.size()];
@@ -61,14 +61,14 @@ public class FileVersioned {
                 int max = 0;
                 for (int i=0; i<versionStrings.length-1; i++)
                 {
-                   
-                    if( Integer.parseInt(versionStrings[i+1]) > Integer.parseInt(versionStrings[i]) )
+                    String  clearVersionNameSecond = versionStrings[i+1].replaceAll("\\D+", "");
+                    String  clearVersionNameFirst = versionStrings[i].replaceAll("\\D+", "");
+                    if( Integer.parseInt(clearVersionNameFirst) < Integer.parseInt(clearVersionNameSecond) )
                     {  
-                        max=Integer.parseInt(versionStrings[i+1]);
-                    
+                        max=Integer.parseInt(clearVersionNameSecond);
                     }
                 }
-                return String.valueOf(max);
+               return max;
             }
     
 }
